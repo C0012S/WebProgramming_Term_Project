@@ -1,0 +1,43 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.ShoppingEntity;
+import com.example.demo.persistence.ShoppingRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class ShoppingService {
+
+	@Autowired
+	private ShoppingRepository repository;
+	
+	public List<ShoppingEntity> create(final ShoppingEntity entity) {
+	
+		validate(entity);
+		
+		repository.save(entity);
+		
+		return repository.findByUserId(entity.getUserId());
+	}
+	
+	public List<ShoppingEntity> retrieve(final String userId) {
+		return repository.findByUserId(userId);
+	}
+	
+	//∏Æ∆—≈‰∏µ
+	private void validate(final ShoppingEntity entity) {
+		if(entity == null) {
+			throw new RuntimeException("Entity cannot be null");
+		}
+		
+		if(entity.getUserId() == null) {
+			throw new RuntimeException("Unknown user.");
+		}
+	}
+}

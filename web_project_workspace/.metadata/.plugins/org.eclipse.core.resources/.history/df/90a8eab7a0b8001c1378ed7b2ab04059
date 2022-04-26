@@ -1,0 +1,9 @@
+package com.example.demo.dto;
+
+public class ShoppingDTO {
+	// 판매할 제품 : 액세서리
+	private String userId; // 사용자 아이디
+	private String title; // 제품 이름
+	private String category; // 제품 종류
+	private String maker; // 제품 브랜드
+}
